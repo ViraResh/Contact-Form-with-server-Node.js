@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Форма для відправки даних</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <script src="form.js"></script>
+    <link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div id='response'></div>
+<script>
+    $(document).ready(function() {
+        $('#submit').click(function () {
+            var name = $('#name').val();
+            var surname = $('#surname').val();
+            var gender = $('#gender input:radio:checked').val();
+            var year = $('#year').val();
+            var tel = $('#tel').val();
+            $.ajax({
+                types: "POST",
+                url: "/form",
+                dataType: "json",
+                data: $("form#my-form").serialize(),
+                success:function(data) { alert(data);
+
+                },
+                error: function() {alert(data); }
+
+
+            });
+        })
+    });
+</script>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-xs-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">Form</div>
+                <div class="panel-body">
+
+                    <!-- OUR FORM -->
+                    <form target="_blank" action="http://localhost:3000/send" id="form" method="post">
+
+                        <!-- NAME -->
+                        <div class="form-group">
+                            <label for="firstname">Name</label>
+                            <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Name">
+                        </div>
+
+                        <!-- SURNAME -->
+                        <div class="form-group">
+                            <label for="lastname">Last Name</label>
+                            <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Last Name">
+                        </div>
+
+                        <!-- GENDER-->
+                        <div class="form-group" id="gender">
+                            <label class="control-label">Gender</label>
+                            <div class="radio">
+                                <label><input type="radio" name="optionsRadios" value="Male">Male</label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" name="optionsRadios" value="Female">Female</label>
+                            </div>
+                        </div>
+
+                        <!-- YEAR BIRTHDAY -->
+                        <div class="form-group">
+                            <label for="year" class="control-label">Year birth</label>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="year" name="year"></select>
+                        </div>
+
+                        <!-- PHONE -->
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input name="phone" id="phone"type="tel" class="form-control" placeholder="+38099000000">
+                        </div>
+
+                        <!-- SUBMIT BTN-->
+                        <button id="submit" type="submit" class="submit btn btn-success pull-right">Send</button>
+                    </form>
+                </div>
+            </div></div>
+    </div>
+</div>
+</div>
+
+
+<!--<form target="_blank" action="http://localhost:3000/send" id="form" method="post">
+    Ім'я:<br>
+    <input type="text" name="firstname" id="firstname">
+    <br>
+    Прізвище:<br>
+    <input type="text" name="lastname" id="lastname">
+    <br>
+    <label>Стать</label><br>
+        <input type="radio" name="optionsRadios" value="Мужской">Мужской
+
+        <input type="radio" name="optionsRadios" value="Женский">Женский
+<br><br>
+    <label>Рік народження</label><br>
+    <select name="year" id="year">
+        <option value="2000">2000</option>
+        <option value="2012">2012</option>
+        <option value="2015">2015</option>
+        <option value="2017">2017</option>
+    </select>
+    <br><br>
+    Телефон:<br>
+    <input type="text" name="phone" id="phone">
+    <br><br>
+    <input class="submit" type="submit" value="Відправити">
+</form>
+<div id="result"></div>
+-->
+<script>
+    var year = 1900;
+    var till = 2015;
+    var options = "";
+    for(var y = year; y <= till; y++) {
+        options += "<option>"+ y +"</option>";
+    }
+    document.getElementById("year").innerHTML = options;
+</script>
+
+
+</body>
+</html>

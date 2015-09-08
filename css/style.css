@@ -1,0 +1,12 @@
+.container {
+    margin: 40px;
+}
+#msg{
+    margin-top: 5px;
+    margin-left: 85px;
+    border: 1px slow green;
+    width: 300px;
+    background: #EDF5F4;
+    text-align: center;
+    color: blue;
+    font-size: 16px;}
